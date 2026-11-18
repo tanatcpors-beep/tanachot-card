@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanachot Kaewnoi - Digital Business Card</title>
+    <!-- Google Fonts (Prompt & Outfit สำหรับความโมเดิร์น ลักชูรี่) -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome สำหรับไอคอนโซเชียล -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: #0b1f14; /* เขียวเข้มลักชูr */
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ตกแต่งด้วยวงกลมเรขาคณิตสไตล์โมเดิร์น ลักชูรี่ */
+        .bg-circle-1 {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(16, 79, 45, 0.4) 0%, rgba(11, 31, 20, 0) 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .bg-circle-2 {
+            position: absolute;
+            bottom: -120px;
+            left: -120px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(29, 120, 71, 0.25) 0%, rgba(11, 31, 20, 0) 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* การ์ดหลักทรงสี่เหลี่ยม ขอบมนนิดๆ ความรู้สึกพรีเมียม */
+        .card-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 420px;
+            background: rgba(16, 37, 26, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            margin: 20px;
+            text-align: center;
+        }
+
+        /* รูปโปรไฟล์ / วงกลมตกแต่ง */
+        .profile-wrapper {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 20px;
+        }
+
+        .profile-circle {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2ecc71, #104f2d);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: 700;
+            color: #ffffff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        /* วงกลมเล็กประดับรอบโปรไฟล์ */
+        .dot-dec {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 24px;
+            height: 24px;
+            background-color: #2ecc71;
+            border-radius: 50%;
+            border: 3px solid #0b1f14;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            color: #ffffff;
+        }
+
+        .title-sub {
+            font-size: 14px;
+            color: #a3b8ac;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ลิงก์ช่องทางติดต่อ (ทรงสี่เหลี่ยมโค้งมน โมเดิร์น) */
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 14px 20px;
+            border-radius: 14px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-btn i {
+            font-size: 20px;
+            width: 35px;
+            color: #2ecc71;
+            text-align: center;
+            margin-right: 10px;
+        }
+
+        .link-btn span {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .link-btn .arrow {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        /* Hover Effect ลักชูรี่ วัยรุ่น */
+        .link-btn:hover {
+            background: rgba(46, 204, 113, 0.15);
+            border-color: rgba(46, 204, 113, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .link-btn:hover .arrow {
+            transform: translateX(4px);
+            color: #2ecc71;
+        }
+
+        /* Footer เล็กๆ */
+        .footer-text {
+            margin-top: 30px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- องค์ประกอบวงกลมตกแต่งพื้นหลัง -->
+    <div class="bg-circle-1"></div>
+    <div class="bg-circle-2"></div>
+
+    <div class="card-container">
+        <!-- โลโก้หรือตัวย่อโปรไฟล์ -->
+        <div class="profile-wrapper">
+            <div class="profile-circle">TK</div>
+            <div class="dot-dec"></div>
+        </div>
+
+        <h1>Tanachot Kaewnoi</h1>
+        <div class="title-sub">Digital Business Card</div>
+
+        <!-- รายการช่องทางติดต่อ -->
+        <div class="links-list">
+            <!-- โทร -->
+            <a href="tel:0612612199" class="link-btn">
+                <i class="fa-solid fa-phone"></i>
+                <span>061-261-2199</span>
+                <i class="fa-solid fa-chevron-right arrow"></i>
+            </a>
+
+            <!-- Line -->
+            <a href="https://line.me/ti/p/~taanachotkeawnoi" target="_blank" class="link-btn">
+                <i class="fa-brands fa-line"></i>
+                <span>taanachotkeawnoi</span>
+                <i class="fa-solid fa-chevron-right arrow"></i>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com/zsottz" target="_blank" class="link-btn">
+                <i class="fa-brands fa-instagram"></i>
+                <span>@zsottz</span>
+                <i class="fa-solid fa-chevron-right arrow"></i>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://tiktok.com/@tanatcszot" target="_blank" class="link-btn">
+                <i class="fa-brands fa-tiktok"></i>
+                <span>@tanatcszot</span>
+                <i class="fa-solid fa-chevron-right arrow"></i>
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://facebook.com" target="_blank" class="link-btn">
+                <i class="fa-brands fa-facebook"></i>
+                <span>Tanachot Kaewnoi</span>
+                <i class="fa-solid fa-chevron-right arrow"></i>
+            </a>
+
+            <!-- Gmail -->
+            <a href="mailto:tanachotkeawnoi@gmail.com" class="link-btn">
+                <i class="fa-solid fa-envelope"></i>
+                <span>tanachotkeawnoi@gmail.com</span>
+                <i class="fa-solid fa-chevron-right arrow"></i>
+            </a>
+        </div>
+
+        <div class="footer-text">© 2026 Tanachot Kaewnoi</div>
+    </div>
+
+</body>
+</html>
